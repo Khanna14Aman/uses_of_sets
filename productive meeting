@@ -1,0 +1,41 @@
+question==>https://codeforces.com/contest/1579/problem/D
+
+#include<bits/stdc++.h>
+#define int long long 
+using namespace std;
+signed main(){
+    int t;
+    cin>>t;
+    while(t--){
+        int n;
+        cin>>n;
+        multiset<pair<int,int>>mul;
+        for(int i=1;i<=n;i++){
+            int a;
+            cin>>a;
+            if(a==0)continue;
+            mul.insert({-a,i});
+        }
+        vector<pair<int,int>>ans;
+        while(mul.size()>1){
+            pair<int,int>p = *mul.begin();
+            mul.erase(p);
+            pair<int,int>q = *mul.begin();
+            mul.erase(q);
+            ans.push_back({p.second,q.second});
+            if(p.first+1<0){
+                mul.insert({p.first+1,p.second});
+            }
+            if(q.first+1<0){
+                mul.insert({q.first+1,q.second});
+            }
+        }
+        cout<<ans.size()<<endl;
+        for(int k=0;k<ans.size();k++){
+            cout<<ans[k].first<<" "<<ans[k].second<<endl;
+        }
+        
+        
+    }
+    return 0;
+}
